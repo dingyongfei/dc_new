@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.litian.dancechar.examples.deeppage.dao.inf.CustomerDao">
+
+    <select id="findListWithDeepPage" resultType="com.litian.dancechar.examples.deeppage.dao.entity.CustomerDO">
+        SELECT
+        c.id,c.no,c.name
+        FROM
+        t_customer c
+        WHERE
+        c.delete_flag = 0
+        <if test="id != null">
+            and c.id > #{id}
+        </if>
+        <if test="no != null and no != ''">
+            and c.no = #{no}
+        </if>
+        order by c.id
+        <if test="pageSize != null">
+            limit #{pageSize}
+        </if>
+    </select>
+
+</mapper>
